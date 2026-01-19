@@ -1,10 +1,3 @@
-//
-//  PersonaeApp.swift
-//  Personae
-//
-//  Created by Paul Vick on 1/19/26.
-//
-
 import SwiftUI
 import SwiftData
 
@@ -12,7 +5,9 @@ import SwiftData
 struct PersonaeApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Character.self,
+            Chat.self,
+            Message.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
