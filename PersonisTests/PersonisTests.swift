@@ -1,14 +1,14 @@
 //
-//  PersonaeTests.swift
-//  PersonaeTests
+//  PersonisTests.swift
+//  PersonisTests
 //
 //  Created by Paul Vick on 1/19/26.
 //
 
 import Testing
-@testable import Personae
+@testable import Personis
 
-struct PersonaeTests {
+struct PersonisTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

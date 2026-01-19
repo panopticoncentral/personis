@@ -15,7 +15,7 @@ struct OnboardingView: View {
                             .font(.system(size: 72))
                             .foregroundStyle(.tint)
 
-                        Text("Welcome to Personae")
+                        Text("Welcome to Personis")
                             .font(.largeTitle.bold())
 
                         Text("Chat with AI characters through role-play")
@@ -51,7 +51,7 @@ struct OnboardingView: View {
                         Text("Connect to OpenRouter")
                             .font(.headline)
 
-                        Text("Personae uses OpenRouter to access AI models. Enter your API key to get started.")
+                        Text("Personis uses OpenRouter to access AI models. Enter your API key to get started.")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
 

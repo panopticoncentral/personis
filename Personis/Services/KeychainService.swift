@@ -11,7 +11,7 @@ enum KeychainError: Error {
 actor KeychainService {
     static let shared = KeychainService()
 
-    private let service = "com.personae.openrouter"
+    private let service = "com.personis.openrouter"
     private let apiKeyAccount = "api-key"
 
     private init() {}

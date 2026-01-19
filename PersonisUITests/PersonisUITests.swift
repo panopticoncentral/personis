@@ -1,13 +1,13 @@
 //
-//  PersonaeUITests.swift
-//  PersonaeUITests
+//  PersonisUITests.swift
+//  PersonisUITests
 //
 //  Created by Paul Vick on 1/19/26.
 //
 
 import XCTest
 
-final class PersonaeUITests: XCTestCase {
+final class PersonisUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

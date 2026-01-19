@@ -12,37 +12,37 @@
 			containerPortal = 8B67663A2F1E8E4F000D166C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B6766412F1E8E4F000D166C;
-			remoteInfo = Personae;
+			remoteInfo = Personis;
 		};
 		8B67665C2F1E8E50000D166C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B67663A2F1E8E4F000D166C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B6766412F1E8E4F000D166C;
-			remoteInfo = Personae;
+			remoteInfo = Personis;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B6766422F1E8E4F000D166C /* Personae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Personae.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B6766512F1E8E50000D166C /* PersonaeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonaeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B67665B2F1E8E50000D166C /* PersonaeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonaeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B6766422F1E8E4F000D166C /* Personis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Personis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B6766512F1E8E50000D166C /* PersonisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B67665B2F1E8E50000D166C /* PersonisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersonisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B6766442F1E8E4F000D166C /* Personae */ = {
+		8B6766442F1E8E4F000D166C /* Personis */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Personae;
+			path = Personis;
 			sourceTree = "<group>";
 		};
-		8B6766542F1E8E50000D166C /* PersonaeTests */ = {
+		8B6766542F1E8E50000D166C /* PersonisTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PersonaeTests;
+			path = PersonisTests;
 			sourceTree = "<group>";
 		};
-		8B67665E2F1E8E50000D166C /* PersonaeUITests */ = {
+		8B67665E2F1E8E50000D166C /* PersonisUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PersonaeUITests;
+			path = PersonisUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +75,9 @@
 		8B6766392F1E8E4F000D166C = {
 			isa = PBXGroup;
 			children = (
-				8B6766442F1E8E4F000D166C /* Personae */,
-				8B6766542F1E8E50000D166C /* PersonaeTests */,
-				8B67665E2F1E8E50000D166C /* PersonaeUITests */,
+				8B6766442F1E8E4F000D166C /* Personis */,
+				8B6766542F1E8E50000D166C /* PersonisTests */,
+				8B67665E2F1E8E50000D166C /* PersonisUITests */,
 				8B6766432F1E8E4F000D166C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +85,9 @@
 		8B6766432F1E8E4F000D166C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B6766422F1E8E4F000D166C /* Personae.app */,
-				8B6766512F1E8E50000D166C /* PersonaeTests.xctest */,
-				8B67665B2F1E8E50000D166C /* PersonaeUITests.xctest */,
+				8B6766422F1E8E4F000D166C /* Personis.app */,
+				8B6766512F1E8E50000D166C /* PersonisTests.xctest */,
+				8B67665B2F1E8E50000D166C /* PersonisUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B6766412F1E8E4F000D166C /* Personae */ = {
+		8B6766412F1E8E4F000D166C /* Personis */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B6766652F1E8E50000D166C /* Build configuration list for PBXNativeTarget "Personae" */;
+			buildConfigurationList = 8B6766652F1E8E50000D166C /* Build configuration list for PBXNativeTarget "Personis" */;
 			buildPhases = (
 				8B67663E2F1E8E4F000D166C /* Sources */,
 				8B67663F2F1E8E4F000D166C /* Frameworks */,
@@ -108,18 +108,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8B6766442F1E8E4F000D166C /* Personae */,
+				8B6766442F1E8E4F000D166C /* Personis */,
 			);
-			name = Personae;
+			name = Personis;
 			packageProductDependencies = (
 			);
-			productName = Personae;
-			productReference = 8B6766422F1E8E4F000D166C /* Personae.app */;
+			productName = Personis;
+			productReference = 8B6766422F1E8E4F000D166C /* Personis.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B6766502F1E8E50000D166C /* PersonaeTests */ = {
+		8B6766502F1E8E50000D166C /* PersonisTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B6766682F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonaeTests" */;
+			buildConfigurationList = 8B6766682F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonisTests" */;
 			buildPhases = (
 				8B67664D2F1E8E50000D166C /* Sources */,
 				8B67664E2F1E8E50000D166C /* Frameworks */,
@@ -131,18 +131,18 @@
 				8B6766532F1E8E50000D166C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				8B6766542F1E8E50000D166C /* PersonaeTests */,
+				8B6766542F1E8E50000D166C /* PersonisTests */,
 			);
-			name = PersonaeTests;
+			name = PersonisTests;
 			packageProductDependencies = (
 			);
-			productName = PersonaeTests;
-			productReference = 8B6766512F1E8E50000D166C /* PersonaeTests.xctest */;
+			productName = PersonisTests;
+			productReference = 8B6766512F1E8E50000D166C /* PersonisTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8B67665A2F1E8E50000D166C /* PersonaeUITests */ = {
+		8B67665A2F1E8E50000D166C /* PersonisUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B67666B2F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonaeUITests" */;
+			buildConfigurationList = 8B67666B2F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonisUITests" */;
 			buildPhases = (
 				8B6766572F1E8E50000D166C /* Sources */,
 				8B6766582F1E8E50000D166C /* Frameworks */,
@@ -154,13 +154,13 @@
 				8B67665D2F1E8E50000D166C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				8B67665E2F1E8E50000D166C /* PersonaeUITests */,
+				8B67665E2F1E8E50000D166C /* PersonisUITests */,
 			);
-			name = PersonaeUITests;
+			name = PersonisUITests;
 			packageProductDependencies = (
 			);
-			productName = PersonaeUITests;
-			productReference = 8B67665B2F1E8E50000D166C /* PersonaeUITests.xctest */;
+			productName = PersonisUITests;
+			productReference = 8B67665B2F1E8E50000D166C /* PersonisUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B67663D2F1E8E4F000D166C /* Build configuration list for PBXProject "Personae" */;
+			buildConfigurationList = 8B67663D2F1E8E4F000D166C /* Build configuration list for PBXProject "Personis" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B6766412F1E8E4F000D166C /* Personae */,
-				8B6766502F1E8E50000D166C /* PersonaeTests */,
-				8B67665A2F1E8E50000D166C /* PersonaeUITests */,
+				8B6766412F1E8E4F000D166C /* Personis */,
+				8B6766502F1E8E50000D166C /* PersonisTests */,
+				8B67665A2F1E8E50000D166C /* PersonisUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		8B6766532F1E8E50000D166C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B6766412F1E8E4F000D166C /* Personae */;
+			target = 8B6766412F1E8E4F000D166C /* Personis */;
 			targetProxy = 8B6766522F1E8E50000D166C /* PBXContainerItemProxy */;
 		};
 		8B67665D2F1E8E50000D166C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B6766412F1E8E4F000D166C /* Personae */;
+			target = 8B6766412F1E8E4F000D166C /* Personis */;
 			targetProxy = 8B67665C2F1E8E50000D166C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -410,7 +410,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.Personae;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.Personis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -442,7 +442,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.Personae;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.Personis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -464,7 +464,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonaeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -472,7 +472,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personae.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Personae";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personis.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Personis";
 			};
 			name = Debug;
 		};
@@ -486,7 +486,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonaeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonisTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -494,7 +494,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personae.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Personae";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Personis.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Personis";
 			};
 			name = Release;
 		};
@@ -506,7 +506,7 @@
 				DEVELOPMENT_TEAM = 5KAYG269JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonaeUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonisUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -514,7 +514,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Personae;
+				TEST_TARGET_NAME = Personis;
 			};
 			name = Debug;
 		};
@@ -526,7 +526,7 @@
 				DEVELOPMENT_TEAM = 5KAYG269JK;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonaeUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = AchatesSoftware.PersonisUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -534,14 +534,14 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Personae;
+				TEST_TARGET_NAME = Personis;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B67663D2F1E8E4F000D166C /* Build configuration list for PBXProject "Personae" */ = {
+		8B67663D2F1E8E4F000D166C /* Build configuration list for PBXProject "Personis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B6766632F1E8E50000D166C /* Debug */,
@@ -550,7 +550,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B6766652F1E8E50000D166C /* Build configuration list for PBXNativeTarget "Personae" */ = {
+		8B6766652F1E8E50000D166C /* Build configuration list for PBXNativeTarget "Personis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B6766662F1E8E50000D166C /* Debug */,
@@ -559,7 +559,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B6766682F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonaeTests" */ = {
+		8B6766682F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonisTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B6766692F1E8E50000D166C /* Debug */,
@@ -568,7 +568,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B67666B2F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonaeUITests" */ = {
+		8B67666B2F1E8E50000D166C /* Build configuration list for PBXNativeTarget "PersonisUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B67666C2F1E8E50000D166C /* Debug */,

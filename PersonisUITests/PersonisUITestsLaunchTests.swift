@@ -1,13 +1,13 @@
 //
-//  PersonaeUITestsLaunchTests.swift
-//  PersonaeUITests
+//  PersonisUITestsLaunchTests.swift
+//  PersonisUITests
 //
 //  Created by Paul Vick on 1/19/26.
 //
 
 import XCTest
 
-final class PersonaeUITestsLaunchTests: XCTestCase {
+final class PersonisUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

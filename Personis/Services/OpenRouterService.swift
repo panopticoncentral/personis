@@ -58,7 +58,7 @@ actor OpenRouterService {
         request.httpMethod = "GET"
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Personae iOS App", forHTTPHeaderField: "X-Title")
+        request.setValue("Personis iOS App", forHTTPHeaderField: "X-Title")
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -108,7 +108,7 @@ actor OpenRouterService {
         request.httpMethod = "POST"
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Personae iOS App", forHTTPHeaderField: "X-Title")
+        request.setValue("Personis iOS App", forHTTPHeaderField: "X-Title")
 
         let requestBody = ChatCompletionRequest(
             model: model,
@@ -158,7 +158,7 @@ actor OpenRouterService {
                     request.httpMethod = "POST"
                     request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    request.setValue("Personae iOS App", forHTTPHeaderField: "X-Title")
+                    request.setValue("Personis iOS App", forHTTPHeaderField: "X-Title")
 
                     let requestBody = ChatCompletionRequest(
                         model: model,
