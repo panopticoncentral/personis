@@ -3,7 +3,10 @@ import SwiftData
 
 @main
 struct PersonisApp: App {
-    var sharedModelContainer: ModelContainer = {
+    let sharedModelContainer: ModelContainer?
+    @State private var containerError: String?
+
+    init() {
         let schema = Schema([
             Character.self,
             Chat.self,
@@ -12,16 +15,35 @@ struct PersonisApp: App {
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            self.sharedModelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            self.sharedModelContainer = nil
+            self._containerError = State(initialValue: "Failed to load data: \(error.localizedDescription)")
         }
-    }()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if let container = sharedModelContainer {
+                ContentView()
+                    .modelContainer(container)
+            } else {
+                VStack(spacing: 16) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.system(size: 48))
+                        .foregroundStyle(.red)
+                    Text("Unable to Load App Data")
+                        .font(.title2.bold())
+                    Text(containerError ?? "An unknown error occurred.")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                    Text("Try deleting and reinstalling the app.")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
+            }
         }
-        .modelContainer(sharedModelContainer)
     }
 }

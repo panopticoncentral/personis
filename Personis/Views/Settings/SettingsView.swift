@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showingAPIKeyChange = false
     @State private var showingDeleteConfirmation = false
+    @State private var deleteError: String?
 
     var body: some View {
         NavigationStack {
@@ -58,6 +59,14 @@ struct SettingsView: View {
             } message: {
                 Text("This will delete all your characters and chats. This cannot be undone.")
             }
+            .alert("Delete Failed", isPresented: Binding(
+                get: { deleteError != nil },
+                set: { if !$0 { deleteError = nil } }
+            )) {
+                Button("OK") { deleteError = nil }
+            } message: {
+                Text(deleteError ?? "An unknown error occurred.")
+            }
         }
     }
 
@@ -68,7 +77,7 @@ struct SettingsView: View {
             try modelContext.delete(model: Character.self)
             try modelContext.save()
         } catch {
-            print("Failed to delete data: \(error)")
+            deleteError = error.localizedDescription
         }
     }
 }

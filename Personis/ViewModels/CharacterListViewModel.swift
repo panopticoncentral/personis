@@ -10,14 +10,14 @@ final class CharacterListViewModel {
     private let openRouter = OpenRouterService.shared
 
     @MainActor
-    func loadModels() async {
-        guard availableModels.isEmpty else { return }
+    func loadModels(forceRefresh: Bool = false) async {
+        guard availableModels.isEmpty || forceRefresh else { return }
 
         isLoadingModels = true
         modelsError = nil
 
         do {
-            availableModels = try await openRouter.fetchModels()
+            availableModels = try await openRouter.fetchModels(forceRefresh: forceRefresh)
         } catch {
             modelsError = error.localizedDescription
         }
@@ -29,12 +29,14 @@ final class CharacterListViewModel {
         name: String,
         systemPrompt: String,
         modelId: String,
+        openingLine: String = "",
         modelContext: ModelContext
     ) -> Character {
         let character = Character(
             name: name,
             systemPrompt: systemPrompt,
-            selectedModelId: modelId
+            selectedModelId: modelId,
+            openingLine: openingLine
         )
         modelContext.insert(character)
         return character

@@ -21,23 +21,32 @@ actor KeychainService {
             throw KeychainError.invalidData
         }
 
-        try? deleteAPIKey()
-
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
-            kSecAttrAccount as String: apiKeyAccount,
+            kSecAttrAccount as String: apiKeyAccount
+        ]
+
+        // Try to update existing entry first
+        let updateAttributes: [String: Any] = [
             kSecValueData as String: data,
             kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
         ]
 
-        let status = SecItemAdd(query as CFDictionary, nil)
+        let updateStatus = SecItemUpdate(query as CFDictionary, updateAttributes as CFDictionary)
 
-        guard status == errSecSuccess else {
-            if status == errSecDuplicateItem {
-                throw KeychainError.duplicateEntry
+        if updateStatus == errSecItemNotFound {
+            // No existing entry — add a new one
+            var addQuery = query
+            addQuery[kSecValueData as String] = data
+            addQuery[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+
+            let addStatus = SecItemAdd(addQuery as CFDictionary, nil)
+            guard addStatus == errSecSuccess else {
+                throw KeychainError.unknown(addStatus)
             }
-            throw KeychainError.unknown(status)
+        } else if updateStatus != errSecSuccess {
+            throw KeychainError.unknown(updateStatus)
         }
     }
 

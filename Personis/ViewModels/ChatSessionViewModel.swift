@@ -10,6 +10,7 @@ final class ChatSessionViewModel {
     var error: String?
 
     private let openRouter = OpenRouterService.shared
+    private var generationTask: Task<Void, Never>?
 
     var displayMessages: [Message] {
         currentChat?.orderedMessages.filter { $0.role != .system } ?? []
@@ -35,7 +36,19 @@ final class ChatSessionViewModel {
         )
         modelContext.insert(systemMessage)
 
-        try? modelContext.save()
+        // Add opening line as first assistant message if character has one
+        let trimmedOpeningLine = character.openingLine.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedOpeningLine.isEmpty {
+            let openingMessage = Message(
+                content: trimmedOpeningLine,
+                role: .assistant,
+                orderIndex: 1,
+                chat: chat
+            )
+            modelContext.insert(openingMessage)
+        }
+
+        save(modelContext)
 
         currentChat = chat
     }
@@ -62,9 +75,9 @@ final class ChatSessionViewModel {
         modelContext.insert(userMessage)
         chat.updatedAt = Date()
 
-        try? modelContext.save()
+        save(modelContext)
 
-        await generateResponse(modelContext: modelContext)
+        startGenerating(modelContext: modelContext)
     }
 
     @MainActor
@@ -75,9 +88,25 @@ final class ChatSessionViewModel {
 
         modelContext.delete(lastMessage)
         chat.updatedAt = Date()
-        try? modelContext.save()
+        save(modelContext)
 
-        await generateResponse(modelContext: modelContext)
+        startGenerating(modelContext: modelContext)
+    }
+
+    @MainActor
+    func cancelGeneration() {
+        generationTask?.cancel()
+        generationTask = nil
+        isGenerating = false
+        streamingContent = ""
+    }
+
+    @MainActor
+    private func startGenerating(modelContext: ModelContext) {
+        generationTask?.cancel()
+        generationTask = Task { @MainActor in
+            await generateResponse(modelContext: modelContext)
+        }
     }
 
     @MainActor
@@ -102,9 +131,12 @@ final class ChatSessionViewModel {
             var fullContent = ""
 
             for try await chunk in stream {
+                try Task.checkCancellation()
                 fullContent += chunk
                 streamingContent = fullContent
             }
+
+            guard !Task.isCancelled else { return }
 
             let nextIndex = (chat.orderedMessages.last?.orderIndex ?? 0) + 1
             let assistantMessage = Message(
@@ -116,10 +148,12 @@ final class ChatSessionViewModel {
             modelContext.insert(assistantMessage)
             chat.updatedAt = Date()
 
-            try? modelContext.save()
+            save(modelContext)
 
             streamingContent = ""
 
+        } catch is CancellationError {
+            // Cancelled by user — not an error
         } catch {
             self.error = error.localizedDescription
         }
@@ -149,6 +183,14 @@ final class ChatSessionViewModel {
             currentChat = nil
         }
         modelContext.delete(chat)
-        try? modelContext.save()
+        save(modelContext)
+    }
+
+    private func save(_ modelContext: ModelContext) {
+        do {
+            try modelContext.save()
+        } catch {
+            self.error = "Failed to save: \(error.localizedDescription)"
+        }
     }
 }

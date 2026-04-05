@@ -4,6 +4,7 @@ struct ChatInputView: View {
     @Binding var userInput: String
     let isGenerating: Bool
     let onSend: () -> Void
+    var onStop: (() -> Void)?
 
     var body: some View {
         HStack(spacing: 12) {
@@ -12,16 +13,19 @@ struct ChatInputView: View {
                 .lineLimit(1...4)
                 .disabled(isGenerating)
 
-            Button(action: onSend) {
-                if isGenerating {
-                    ProgressView()
-                        .frame(width: 24, height: 24)
-                } else {
+            if isGenerating {
+                Button(action: { onStop?() }) {
+                    Image(systemName: "stop.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(.red)
+                }
+            } else {
+                Button(action: onSend) {
                     Image(systemName: "arrow.up.circle.fill")
                         .font(.title2)
                 }
+                .disabled(userInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
-            .disabled(userInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isGenerating)
         }
         .padding()
         .background(.bar)

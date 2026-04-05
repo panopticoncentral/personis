@@ -7,17 +7,19 @@ final class Character {
     var name: String = ""
     var systemPrompt: String = ""
     var selectedModelId: String = ""
+    var openingLine: String = ""
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
 
     @Relationship(deleteRule: .cascade, inverse: \Chat.character)
     var chats: [Chat]?
 
-    init(name: String, systemPrompt: String, selectedModelId: String) {
+    init(name: String, systemPrompt: String, selectedModelId: String, openingLine: String = "") {
         self.id = UUID()
         self.name = name
         self.systemPrompt = systemPrompt
         self.selectedModelId = selectedModelId
+        self.openingLine = openingLine
         self.createdAt = Date()
         self.updatedAt = Date()
     }

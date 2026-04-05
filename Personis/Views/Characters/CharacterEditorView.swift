@@ -11,6 +11,7 @@ struct CharacterEditorView: View {
     @State private var name: String = ""
     @State private var systemPrompt: String = ""
     @State private var selectedModelId: String = "anthropic/claude-sonnet-4"
+    @State private var openingLine: String = ""
 
     @State private var showingModelPicker = false
 
@@ -48,6 +49,15 @@ struct CharacterEditorView: View {
                 } footer: {
                     Text("Describe the character's personality, background, and how they should respond.")
                 }
+
+                Section {
+                    TextField("e.g. \"Hello! How can I help you today?\"", text: $openingLine, axis: .vertical)
+                        .lineLimit(2...4)
+                } header: {
+                    Text("Opening Line")
+                } footer: {
+                    Text("Optional. The character will say this to start each new conversation.")
+                }
             }
             .navigationTitle(isEditing ? "Edit Character" : "New Character")
             .navigationBarTitleDisplayMode(.inline)
@@ -68,6 +78,7 @@ struct CharacterEditorView: View {
                     name = c.name
                     systemPrompt = c.systemPrompt
                     selectedModelId = c.selectedModelId
+                    openingLine = c.openingLine
                 }
             }
         }
@@ -78,12 +89,14 @@ struct CharacterEditorView: View {
             existing.name = name
             existing.systemPrompt = systemPrompt
             existing.selectedModelId = selectedModelId
+            existing.openingLine = openingLine
             existing.updatedAt = Date()
         } else {
             _ = viewModel.createCharacter(
                 name: name,
                 systemPrompt: systemPrompt,
                 modelId: selectedModelId,
+                openingLine: openingLine,
                 modelContext: modelContext
             )
         }

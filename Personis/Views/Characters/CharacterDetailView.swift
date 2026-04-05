@@ -9,9 +9,9 @@ struct CharacterDetailView: View {
     let character: Character
 
     @State private var selectedChat: Chat?
-    @State private var showingNewChat = false
     @State private var showingEditor = false
     @State private var showingDeleteConfirmation = false
+    @State private var chatViewModel = ChatSessionViewModel()
 
     private var sortedChats: [Chat] {
         (character.chats ?? []).sorted { $0.updatedAt > $1.updatedAt }
@@ -21,7 +21,10 @@ struct CharacterDetailView: View {
         List {
             Section {
                 Button {
-                    showingNewChat = true
+                    Task {
+                        await chatViewModel.startNewChat(character: character, modelContext: modelContext)
+                        selectedChat = chatViewModel.currentChat
+                    }
                 } label: {
                     Label("New Chat", systemImage: "plus.circle.fill")
                         .font(.headline)
@@ -81,9 +84,6 @@ struct CharacterDetailView: View {
         .navigationDestination(item: $selectedChat) { chat in
             ChatView(chat: chat)
         }
-        .navigationDestination(isPresented: $showingNewChat) {
-            NewChatView(character: character)
-        }
         .overlay {
             if sortedChats.isEmpty {
                 ContentUnavailableView(
@@ -102,6 +102,7 @@ struct CharacterDetailView: View {
             modelContext.delete(chat)
         }
     }
+
 }
 
 struct ChatRowView: View {

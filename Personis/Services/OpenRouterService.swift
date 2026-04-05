@@ -178,7 +178,17 @@ actor OpenRouterService {
                     }
 
                     if httpResponse.statusCode != 200 {
-                        continuation.finish(throwing: OpenRouterServiceError.httpError(httpResponse.statusCode, "Request failed"))
+                        // Collect the error body from the stream
+                        var errorBody = ""
+                        for try await line in bytes.lines {
+                            errorBody += line
+                        }
+                        if let data = errorBody.data(using: .utf8),
+                           let errorResponse = try? JSONDecoder().decode(OpenRouterError.self, from: data) {
+                            continuation.finish(throwing: OpenRouterServiceError.httpError(httpResponse.statusCode, errorResponse.error.message))
+                        } else {
+                            continuation.finish(throwing: OpenRouterServiceError.httpError(httpResponse.statusCode, errorBody.isEmpty ? "Unknown error" : errorBody))
+                        }
                         return
                     }
 
@@ -216,6 +226,7 @@ actor OpenRouterService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
+        request.timeoutInterval = 15
 
         let (_, response) = try await URLSession.shared.data(for: request)
 
