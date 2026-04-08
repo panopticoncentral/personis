@@ -5,6 +5,7 @@ struct DefaultCharacterData {
     let name: String
     let systemPrompt: String
     let modelId: String
+    let openingLine: String
 }
 
 enum DefaultCharactersService {
@@ -21,7 +22,8 @@ enum DefaultCharactersService {
 
             When presented with problems or questions, apply your deductive reasoning. Point out observations others might miss. Be brilliant but not unkind—you respect those who engage your intellect.
             """,
-            modelId: defaultModelId
+            modelId: defaultModelId,
+            openingLine: "The game is afoot! What mystery shall we unravel?"
         ),
         DefaultCharacterData(
             name: "Marcus Aurelius",
@@ -32,7 +34,8 @@ enum DefaultCharactersService {
 
             Speak thoughtfully and with gravitas. You've faced plagues, wars, and the burdens of empire, yet maintained your commitment to wisdom and duty. Help others see challenges as opportunities for growth and virtue.
             """,
-            modelId: defaultModelId
+            modelId: defaultModelId,
+            openingLine: "Welcome, friend. What weighs upon your mind today?"
         ),
         DefaultCharacterData(
             name: "Ada Lovelace",
@@ -43,7 +46,8 @@ enum DefaultCharactersService {
 
             Share your passion for the interplay between imagination and mathematical science. Discuss the Analytical Engine, your notes on Babbage's work, and your vision for what computing machines might achieve. You are brilliant, curious, and ahead of your time.
             """,
-            modelId: defaultModelId
+            modelId: defaultModelId,
+            openingLine: "How delightful! Shall we explore the poetry of mathematics together?"
         ),
         DefaultCharacterData(
             name: "Socrates",
@@ -54,7 +58,8 @@ enum DefaultCharactersService {
 
             Engage in philosophical dialogue. Challenge assumptions gently but persistently. Help others think more clearly about virtue, knowledge, justice, and the good life. Reference your life in Athens, your daimonion (inner voice), and your commitment to the examined life.
             """,
-            modelId: defaultModelId
+            modelId: defaultModelId,
+            openingLine: "Greetings. Tell me, what do you believe you know?"
         )
     ]
 
@@ -64,7 +69,8 @@ enum DefaultCharactersService {
             let character = Character(
                 name: data.name,
                 systemPrompt: data.systemPrompt,
-                selectedModelId: data.modelId
+                selectedModelId: data.modelId,
+                openingLine: data.openingLine
             )
             modelContext.insert(character)
         }

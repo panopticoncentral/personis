@@ -4,23 +4,36 @@ struct MessageBubbleView: View {
     let content: String
     let role: MessageRole
     var isStreaming: Bool = false
+    var character: Character?
 
-    init(message: Message) {
+    init(message: Message, character: Character? = nil) {
         self.content = message.content
         self.role = message.role
         self.isStreaming = false
+        self.character = character
     }
 
-    init(content: String, role: MessageRole, isStreaming: Bool = false) {
+    init(content: String, role: MessageRole, isStreaming: Bool = false, character: Character? = nil) {
         self.content = content
         self.role = role
         self.isStreaming = isStreaming
+        self.character = character
     }
 
     var body: some View {
-        HStack {
+        HStack(alignment: .bottom, spacing: 8) {
             if role == .user {
                 Spacer(minLength: 60)
+            }
+
+            if role == .assistant {
+                if let character {
+                    AvatarView(character: character, size: 28)
+                } else {
+                    Circle()
+                        .fill(Color(.systemGray4))
+                        .frame(width: 28, height: 28)
+                }
             }
 
             VStack(alignment: role == .user ? .trailing : .leading, spacing: 4) {
@@ -67,7 +80,7 @@ struct MessageBubbleView: View {
             )
 
             MessageBubbleView(
-                content: "Ah, an excellent question! My methods rely primarily on careful observation and logical deduction. You see, most people look but do not observe. The distinction is clear...",
+                content: "Ah, an excellent question!",
                 role: .assistant,
                 isStreaming: true
             )

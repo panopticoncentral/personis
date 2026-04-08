@@ -74,6 +74,7 @@ final class ChatSessionViewModel {
         )
         modelContext.insert(userMessage)
         chat.updatedAt = Date()
+        chat.character?.updatedAt = Date()
 
         save(modelContext)
 
@@ -147,6 +148,7 @@ final class ChatSessionViewModel {
             )
             modelContext.insert(assistantMessage)
             chat.updatedAt = Date()
+            chat.character?.updatedAt = Date()
 
             save(modelContext)
 

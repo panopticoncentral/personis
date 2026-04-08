@@ -19,6 +19,24 @@ struct CharacterDetailView: View {
 
     var body: some View {
         List {
+            // Profile header
+            Section {
+                VStack(spacing: 12) {
+                    AvatarView(character: character, size: 80)
+
+                    Text(character.name)
+                        .font(.title2)
+                        .fontWeight(.bold)
+
+                    Text(character.selectedModelId)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .listRowBackground(Color.clear)
+            }
+
+            // Actions
             Section {
                 Button {
                     Task {
@@ -26,11 +44,23 @@ struct CharacterDetailView: View {
                         selectedChat = chatViewModel.currentChat
                     }
                 } label: {
-                    Label("New Chat", systemImage: "plus.circle.fill")
-                        .font(.headline)
+                    Label("New Chat", systemImage: "plus.message.fill")
+                }
+
+                Button {
+                    showingEditor = true
+                } label: {
+                    Label("Edit Character", systemImage: "pencil")
+                }
+
+                Button(role: .destructive) {
+                    showingDeleteConfirmation = true
+                } label: {
+                    Label("Delete Character", systemImage: "trash")
                 }
             }
 
+            // Conversations
             if !sortedChats.isEmpty {
                 Section("Conversations") {
                     ForEach(sortedChats) { chat in
@@ -45,27 +75,8 @@ struct CharacterDetailView: View {
                 }
             }
         }
-        .navigationTitle(character.name)
-        .navigationBarTitleDisplayMode(.large)
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Menu {
-                    Button {
-                        showingEditor = true
-                    } label: {
-                        Label("Edit Character", systemImage: "pencil")
-                    }
-
-                    Button(role: .destructive) {
-                        showingDeleteConfirmation = true
-                    } label: {
-                        Label("Delete Character", systemImage: "trash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                }
-            }
-        }
+        .navigationTitle("Info")
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingEditor) {
             CharacterEditorView(character: character)
         }
@@ -84,16 +95,6 @@ struct CharacterDetailView: View {
         .navigationDestination(item: $selectedChat) { chat in
             ChatView(chat: chat)
         }
-        .overlay {
-            if sortedChats.isEmpty {
-                ContentUnavailableView(
-                    "No Chats Yet",
-                    systemImage: "bubble.left.and.bubble.right",
-                    description: Text("Tap \"New Chat\" to start a conversation with \(character.name)")
-                )
-                .offset(y: 60)
-            }
-        }
     }
 
     private func deleteChats(at offsets: IndexSet) {
@@ -102,7 +103,6 @@ struct CharacterDetailView: View {
             modelContext.delete(chat)
         }
     }
-
 }
 
 struct ChatRowView: View {
@@ -110,9 +110,17 @@ struct ChatRowView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(chat.title.isEmpty ? "New Chat" : chat.title)
-                .font(.headline)
-                .lineLimit(1)
+            HStack {
+                Text(chat.title.isEmpty ? "New Chat" : chat.title)
+                    .font(.headline)
+                    .lineLimit(1)
+
+                Spacer()
+
+                Text(chat.updatedAt, style: .relative)
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
 
             if let firstMessage = chat.orderedMessages.first(where: { $0.role == .assistant }) {
                 Text(firstMessage.content)
@@ -120,10 +128,6 @@ struct ChatRowView: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
             }
-
-            Text(chat.updatedAt, style: .relative)
-                .font(.caption)
-                .foregroundStyle(.tertiary)
         }
         .padding(.vertical, 4)
     }

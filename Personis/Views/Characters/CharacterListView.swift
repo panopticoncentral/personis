@@ -5,11 +5,12 @@ struct CharacterListView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(CharacterListViewModel.self) private var viewModel
 
-    @Query(sort: \Character.name) private var characters: [Character]
+    @Query(sort: \Character.updatedAt, order: .reverse) private var characters: [Character]
 
-    @State private var selectedCharacter: Character?
+    @State private var selectedChat: Chat?
     @State private var showingEditor = false
     @State private var showingSettings = false
+    @State private var chatViewModel = ChatSessionViewModel()
 
     var body: some View {
         NavigationStack {
@@ -18,12 +19,13 @@ struct CharacterListView: View {
                     CharacterRow(character: character)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            selectedCharacter = character
+                            navigateToChat(for: character)
                         }
                 }
                 .onDelete(perform: deleteCharacters)
             }
-            .navigationTitle("Characters")
+            .listStyle(.plain)
+            .navigationTitle("Messages")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -36,12 +38,12 @@ struct CharacterListView: View {
                     Button {
                         showingEditor = true
                     } label: {
-                        Image(systemName: "plus")
+                        Image(systemName: "square.and.pencil")
                     }
                 }
             }
-            .navigationDestination(item: $selectedCharacter) { character in
-                CharacterDetailView(character: character)
+            .navigationDestination(item: $selectedChat) { chat in
+                ChatView(chat: chat)
             }
             .sheet(isPresented: $showingEditor) {
                 CharacterEditorView(character: nil)
@@ -52,15 +54,27 @@ struct CharacterListView: View {
             .overlay {
                 if characters.isEmpty {
                     ContentUnavailableView(
-                        "No Characters Yet",
-                        systemImage: "person.crop.circle.badge.plus",
-                        description: Text("Tap the + button to create your first character")
+                        "No Messages",
+                        systemImage: "bubble.left.and.text.bubble.right",
+                        description: Text("Tap the compose button to start a new conversation")
                     )
                 }
             }
             .task {
                 viewModel.seedDefaultCharactersIfNeeded(modelContext: modelContext)
                 await viewModel.loadModels()
+            }
+        }
+    }
+
+    private func navigateToChat(for character: Character) {
+        let sortedChats = (character.chats ?? []).sorted { $0.updatedAt > $1.updatedAt }
+        if let mostRecent = sortedChats.first {
+            selectedChat = mostRecent
+        } else {
+            Task {
+                await chatViewModel.startNewChat(character: character, modelContext: modelContext)
+                selectedChat = chatViewModel.currentChat
             }
         }
     }

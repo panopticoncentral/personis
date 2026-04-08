@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct CharacterEditorView: View {
     @Environment(\.modelContext) private var modelContext
@@ -12,6 +13,8 @@ struct CharacterEditorView: View {
     @State private var systemPrompt: String = ""
     @State private var selectedModelId: String = "anthropic/claude-sonnet-4"
     @State private var openingLine: String = ""
+    @State private var avatarImageData: Data?
+    @State private var avatarItem: PhotosPickerItem?
 
     @State private var showingModelPicker = false
 
@@ -20,6 +23,38 @@ struct CharacterEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section {
+                    VStack(spacing: 12) {
+                        AvatarView(
+                            name: name.isEmpty ? "?" : name,
+                            avatarImageData: avatarImageData,
+                            size: 80
+                        )
+
+                        HStack(spacing: 16) {
+                            PhotosPicker(
+                                selection: $avatarItem,
+                                matching: .images
+                            ) {
+                                Text(avatarImageData == nil ? "Add Photo" : "Change Photo")
+                                    .font(.subheadline)
+                            }
+
+                            if avatarImageData != nil {
+                                Button(role: .destructive) {
+                                    avatarImageData = nil
+                                    avatarItem = nil
+                                } label: {
+                                    Text("Remove")
+                                        .font(.subheadline)
+                                }
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                }
+
                 Section("Name") {
                     TextField("Character name", text: $name)
                 }
@@ -73,12 +108,21 @@ struct CharacterEditorView: View {
             .sheet(isPresented: $showingModelPicker) {
                 ModelPickerView(selectedModelId: $selectedModelId)
             }
+            .onChange(of: avatarItem) {
+                Task {
+                    if let item = avatarItem,
+                       let data = try? await item.loadTransferable(type: Data.self) {
+                        avatarImageData = data
+                    }
+                }
+            }
             .onAppear {
                 if let c = character {
                     name = c.name
                     systemPrompt = c.systemPrompt
                     selectedModelId = c.selectedModelId
                     openingLine = c.openingLine
+                    avatarImageData = c.avatarImageData
                 }
             }
         }
@@ -90,15 +134,17 @@ struct CharacterEditorView: View {
             existing.systemPrompt = systemPrompt
             existing.selectedModelId = selectedModelId
             existing.openingLine = openingLine
+            existing.avatarImageData = avatarImageData
             existing.updatedAt = Date()
         } else {
-            _ = viewModel.createCharacter(
+            let newCharacter = viewModel.createCharacter(
                 name: name,
                 systemPrompt: systemPrompt,
                 modelId: selectedModelId,
                 openingLine: openingLine,
                 modelContext: modelContext
             )
+            newCharacter.avatarImageData = avatarImageData
         }
 
         dismiss()

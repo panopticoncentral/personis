@@ -8,6 +8,7 @@ final class Character {
     var systemPrompt: String = ""
     var selectedModelId: String = ""
     var openingLine: String = ""
+    @Attribute(.externalStorage) var avatarImageData: Data?
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
 
